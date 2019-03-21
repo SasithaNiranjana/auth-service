@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
-    @GetMapping("/hello")
-    public String sayHello(){
-        return "Hello endpoint";
+    @GetMapping(value = "/user")
+    public  String checkUser(){
+        return "Hello";
     }
 }

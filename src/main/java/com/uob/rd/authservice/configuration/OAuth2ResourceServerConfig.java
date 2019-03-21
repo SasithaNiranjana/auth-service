@@ -16,12 +16,15 @@ public class OAuth2ResourceServerConfig extends ResourceServerConfigurerAdapter 
     }
     @Override
     public void configure(ResourceServerSecurityConfigurer config) {
-        config.tokenServices(defaultTokenServices);
+        config.tokenServices(defaultTokenServices).resourceId("account-service");
     }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().anyRequest().permitAll();
+        http.authorizeRequests()
+                .antMatchers("/oauth/**").permitAll()
+                .antMatchers("/user").hasAuthority("USER1")
+                .anyRequest().authenticated();
         http.headers().frameOptions().disable();
     }
 }
